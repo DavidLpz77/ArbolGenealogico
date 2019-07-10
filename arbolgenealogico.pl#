@@ -1,0 +1,55 @@
+%Padres, hermana, yo
+
+padreDe('Rosa','David').
+padreDe('Luis','David').
+padreDe('Rosa','Sulay').
+padreDe('Luis','Sulay').
+
+%Abuelos y Bisabuelos Maternos
+
+padreDe('Rosa','Rosa').
+padreDe('Jose','Rosa').
+
+padreDe('Isabel','Rosa').
+padreDe('Carlos','Rosa').
+
+padreDe('Teresa','Jose').
+padreDe('Amadeo','Jose').
+
+%Abuelos y Bisabuelos Paternos
+
+padreDe('Graciela','Luis').
+padreDe('Graciela','Elena').
+padreDe('Graciela','Blanca').
+padreDe('Grabriel','Luis').
+padreDe('Grabriel','Elena').
+padreDe('Grabriel','Blanca').
+
+padreDe('Evaristo','Graciela').
+padreDe('Mercedez','Graciela').
+
+padreDe('Agustin','Gabriel').
+padreDe('Anacelia','Gabriel').
+
+%Primos y tios
+
+padreDe('Elena,'Fernanda').
+padreDe('Elena','Paola').
+padreDe('Jorge','Fernanda').
+padreDe('Jorge','Paola').
+padreDe('Blanca','Leonardo').
+padreDe('Blanca','Yuri').
+padreDe('Isaias','Leonardo').
+padreDe('Isaias','Yuri').
+
+hermanoDe(A,B) :-padreDe(C,A), padreDe(C,B), A \== B.
+
+tioDe(A,B) :- hermanoDe(A,C), hijoDe(B,C).
+primo(A,B) :- tioDe(C,A), hijoDe(B,C).
+hijoDe(A,B) :- padreDe(B,A).
+abueloDe(A,B) :-padreDe(A,C), padreDe(C,B).
+
+casado(A,B) :- hijoDe(C,A), hijoDe(C,B), A \== B.
+nietoDe(A,B) :- padreDe(B,C), padreDe(C,A).
+
+feliz(A) :- (casado(A,B)), A \== B.
